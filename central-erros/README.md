@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em serviços ou microsserviços. Nestes ambientes complexos, erros podem surgir em diferentes camadas da aplicação (backend, frontend, mobile, desktop) e mesmo em serviços distintos. Desta forma, é muito importante que os desenvolvedores possam centralizar todos os registros de erros em um local, de onde podem monitorar e tomar decisões mais acertadas. Neste projeto vamos implementar um sistema para centralizar registros de erros de aplicações. 
+Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em serviços ou microsserviços. Nestes ambientes complexos, erros podem surgir em diferentes camadas da aplicação (backend, frontend, mobile, desktop) e mesmo em serviços distintos. Desta forma, é muito importante que os desenvolvedores possam centralizar todos os registros de erros em um local, de onde podem monitorar e tomar decisões mais acertadas. Neste projeto vamos implementar um sistema para centralizar registros de erros de aplicações.
 
 A arquitetura do projeto é formada por:
 
@@ -28,16 +28,16 @@ A arquitetura do projeto é formada por:
 
 Os wireframes a seguir servem para demonstrar as funcionalidades básicas da aplicação.
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/1-cadastro.png)
+![Cadastro](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/1-cadastro.png)
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/2-login.png)
+![Login](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/2-login.png)
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/3-dashboard.png)
+![DashBoard](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/3-dashboard.png)
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/4-ambientes.png)
+![Ambientes](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/4-ambientes.png)
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/5-order.png)
+![Ordenação](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/5-order.png)
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/6-filtro.png)
+![Filtros](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/6-filtro.png)
 
-![](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/7-detalhes.png)
+![Detalhes](https://codenation-challenges.s3-us-west-1.amazonaws.com/central-erros/7-detalhes.png)
