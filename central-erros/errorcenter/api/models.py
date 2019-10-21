@@ -12,3 +12,7 @@ class Log(models.Model):
     #level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
     #origin = models.ForeignKey(Origin, on_delete=models.PROTECT, null=True)
     #user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+
+class Origin(models.Model):
+    description = models.TextField("Descrição", max_length=500)
+

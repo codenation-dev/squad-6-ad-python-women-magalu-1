@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Log
+from .models import Log, Origin
 
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,3 +15,10 @@ class LogSerializer(serializers.ModelSerializer):
                   #user
                  ]
         read_only_fields = ['occurrence_date', 'active']
+
+class OriginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Origin
+        fields = ['description']
+        read_only_fields = ['description']
+
