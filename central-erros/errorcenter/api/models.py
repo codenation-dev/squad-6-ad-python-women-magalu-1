@@ -22,3 +22,6 @@ class User(models.Model):
     email      = models.EmailField("Email", max_length=100)
     password   = models.CharField("Password", max_length=50, validators=[MinLengthValidator(8)])
     last_login = models.DateTimeField("Ultimo Login", auto_now_add=True)
+
+class Environment(models.Model):
+    description = models.CharField("Descrição", max_length=50)

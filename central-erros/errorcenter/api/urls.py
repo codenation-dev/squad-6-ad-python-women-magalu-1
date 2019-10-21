@@ -10,5 +10,6 @@ router.register(r'users', views.UserApiViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('environments/', views.EnvironmentListOnlyApiView.as_view())
 ]
 
