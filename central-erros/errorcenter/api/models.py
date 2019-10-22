@@ -9,7 +9,7 @@ OPTIONS = [
 # Create your models here.
 
 class Level(models.Model):
-    description = models.TextField("Descrição", max_length=500, choices=OPTIONS)
+    description = models.TextField("Descrição", max_length=8, choices=OPTIONS)
 
 class Origin(models.Model):
     description = models.TextField("Descrição", max_length=500)
