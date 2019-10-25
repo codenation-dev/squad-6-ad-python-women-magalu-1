@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 OPTIONS = [
     ('DEBUG', 'DEBUG'),
@@ -25,3 +26,12 @@ class Log(models.Model):
     level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
     origin = models.ForeignKey(Origin, on_delete=models.PROTECT, null=True)
     #user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+
+class User(models.Model):
+    name       = models.CharField("Nome", max_length=50)
+    email      = models.EmailField("Email", max_length=100)
+    password   = models.CharField("Password", max_length=50, validators=[MinLengthValidator(8)])
+    last_login = models.DateTimeField("Ultimo Login", auto_now_add=True)
+
+class Environment(models.Model):
+    description = models.CharField("Descrição", max_length=50)
