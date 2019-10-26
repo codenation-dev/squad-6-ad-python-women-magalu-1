@@ -1,7 +1,20 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 
+OPTIONS = [
+    ('DEBUG', 'DEBUG'),
+    ('ERROR', 'ERROR'),
+    ('WARNING', 'WARNING'),
+]
+
 # Create your models here.
+
+class Level(models.Model):
+    description = models.TextField("Descrição", max_length=8, choices=OPTIONS)
+
+class Origin(models.Model):
+    description = models.TextField("Descrição", max_length=500)
+
 class Log(models.Model):
     details = models.TextField("Detalhes", max_length=500)
     number_events = models.IntegerField("Quantidade de Eventos")
@@ -10,12 +23,9 @@ class Log(models.Model):
     active = models.BooleanField("Ativo", default=True)
 
     #environment = models.ForeignKey(Environment, on_delete=models.PROTECT, null=True)
-    #level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
-    #origin = models.ForeignKey(Origin, on_delete=models.PROTECT, null=True)
+    level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
+    origin = models.ForeignKey(Origin, on_delete=models.PROTECT, null=True)
     #user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
-
-class Origin(models.Model):
-    description = models.TextField("Descrição", max_length=500)
 
 class User(models.Model):
     name       = models.CharField("Nome", max_length=50)

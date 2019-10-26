@@ -2,7 +2,8 @@ from rest_framework import serializers
 from .models import (Log, 
                      Origin, 
                      User, 
-                     Environment)
+                     Environment,
+                     Level)
 
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,8 +14,8 @@ class LogSerializer(serializers.ModelSerializer):
                   'occurrence_date',
                   'active',
                   #environment
-                  #level
-                  #origin
+                  'level',
+                  'origin',
                   #user
                  ]
         read_only_fields = ['occurrence_date', 'active']
@@ -22,6 +23,12 @@ class LogSerializer(serializers.ModelSerializer):
 class OriginSerializer(serializers.ModelSerializer):
     class Meta:
         model = Origin
+        fields = ['description']
+        read_only_fields = ['description']
+
+class LevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Level
         fields = ['description']
         read_only_fields = ['description']
 

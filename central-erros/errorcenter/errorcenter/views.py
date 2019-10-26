@@ -7,7 +7,7 @@ def user_login(request):
     if  request.method == 'POST':
         form = UserModelForm(request.POST)
         if form.is_valid():
-            #return redirect('')
+            return redirect('')
     else:
         form = UserModelForm()
 
