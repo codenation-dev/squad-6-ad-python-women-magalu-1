@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 # Create your models here.
 class Log(models.Model):
@@ -16,3 +17,11 @@ class Log(models.Model):
 class Origin(models.Model):
     description = models.TextField("Descrição", max_length=500)
 
+class User(models.Model):
+    name       = models.CharField("Nome", max_length=50)
+    email      = models.EmailField("Email", max_length=100)
+    password   = models.CharField("Password", max_length=50, validators=[MinLengthValidator(8)])
+    last_login = models.DateTimeField("Ultimo Login", auto_now_add=True)
+
+class Environment(models.Model):
+    description = models.CharField("Descrição", max_length=50)

@@ -7,11 +7,11 @@ def user_login(request):
     if  request.method == 'POST':
         form = UserModelForm(request.POST)
         if form.is_valid():
-            return redirect('products:list')
+            #return redirect('')
     else:
         form = UserModelForm()
 
     context = {
         'form': form
     }
-    return render(request, 'registration/login.html', context=context) 
+    return render(request, 'registration/login.html', {'form': form}) 
