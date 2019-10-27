@@ -1,7 +1,12 @@
 from rest_framework import serializers
+
+import django.contrib.auth.password_validation as validators
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.core import exceptions
+from django.db import models
 from .models import (Log, 
                      Origin, 
-                     User, 
                      Environment)
 
 class LogSerializer(serializers.ModelSerializer):
@@ -12,10 +17,10 @@ class LogSerializer(serializers.ModelSerializer):
                   'number_events',
                   'occurrence_date',
                   'active',
-                  #environment
-                  #level
-                  #origin
-                  #user
+                  'environment',
+                #   'level',
+                  'origin',
+                  'user'
                  ]
         read_only_fields = ['occurrence_date', 'active']
 
@@ -25,11 +30,37 @@ class OriginSerializer(serializers.ModelSerializer):
         fields = ['description']
         read_only_fields = ['description']
 
+
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
-        fields = ['name', 'email', 'password', 'last_login']
-        read_only_fields = ['last_login']
+        fields = ['username', 'email', 'password']
+    
+    def validate_password(self, data):
+        try:
+            validators.validate_password(data, self.instance)
+        
+        except exceptions.ValidationError as e:
+            raise serializers.ValidationError(e.messages)
+
+        return data
+    
+    def validate_email(self, data):
+        users = User.objects.filter(email=data)
+
+        if(users):
+            raise serializers.ValidationError(["email must be unique"])
+
+        return data
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        user.is_active = True
+        user.save()
+        
+        return user
+
 
 class EnvironmentSerializer(serializers.ModelSerializer):
     class Meta:
