@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.core import exceptions
 from django.db import models
+from django.views.decorators.csrf import csrf_exempt
 from .models import (Log, 
                      Origin, 
                      Environment,
@@ -13,7 +14,7 @@ from .models import (Log,
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
-        fields = ['title',
+        fields = ('title',
                   'details',
                   'number_events',
                   'occurrence_date',
@@ -22,7 +23,7 @@ class LogSerializer(serializers.ModelSerializer):
                   'level',
                   'origin',
                   'user'
-                 ]
+                 )
         read_only_fields = ['occurrence_date', 'active']
 
 class OriginSerializer(serializers.ModelSerializer):
@@ -66,7 +67,6 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         
         return user
-
 
 class EnvironmentSerializer(serializers.ModelSerializer):
     class Meta:
