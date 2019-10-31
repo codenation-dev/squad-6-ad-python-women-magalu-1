@@ -42,7 +42,14 @@ class LogsList(ListView):
     template_name = 'logs/new_list.html'   
     
     # Custom defined context object value, this can override default context object value.
-    context_object_name = 'logs'  
+    context_object_name = 'logs'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LogsList, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['environments'] = Environment.objects.all()
+        return context
 
 class LevelsList(ListView):
     # Belong's to which model.

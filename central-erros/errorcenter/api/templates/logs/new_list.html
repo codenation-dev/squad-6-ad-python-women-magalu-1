@@ -50,14 +50,12 @@
                             <div class="actions">
 
                                 <label>Ambiente:
-                                    <select name="action" required>
+                                    <select name="env" required>
                                         <option value="" selected>---------</option>
                                         {% for environment in environments %}
                                             <option value="{{environment.id}}">{{environment.description}}</option>
                                         {% endfor %}
-                                        
                                     </select>
-
                                 </label><input type="hidden" name="select_across" value="0" class="select-across" />
                                 
                                 <label>Ordenar por:
@@ -132,7 +130,7 @@
                                                             class="action-select" data-id="{{log.id}}" />
                                                     </td>
                                                     <td class="field-__str__">
-                                                        <a> Level 1</a>
+                                                        <a> {{log.level.description}}</a>
                                                     </td>
                                                     <td class="field-__str__">
                                                         <a>{{ log.title }}</a>
