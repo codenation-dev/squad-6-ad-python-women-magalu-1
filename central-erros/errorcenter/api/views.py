@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
@@ -9,6 +9,8 @@ from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+
+from .forms import UserModelForm
 
 from .models import Log, Origin, Environment, Level
 from .serializers import (LogSerializer, 
@@ -56,8 +58,6 @@ class UserToken(APIView):
 
     def post(self, request):
 
-        print(request)
-
         email = request['email']
         password = request['senha']
         
@@ -74,3 +74,21 @@ class UserToken(APIView):
         token, _ = Token.objects.get_or_create(user=user)
        
         return Response({'token': token.key}, status=status.HTTP_200_OK)
+
+    def user_login(request):
+        if  request.method == 'POST':
+
+            response = UserToken.post(request.POST, request.POST)
+            status = response.status_code
+
+            if (status != 200):
+                return render(request, 'registration/login.html', {'error': response.data['error']})
+            else:
+                return redirect('/logs', {'token': response.data['token']})
+        else:
+            form = UserModelForm()
+
+        context = {
+            'form': form
+        }
+        return render(request, 'registration/login.html', {'form': form})

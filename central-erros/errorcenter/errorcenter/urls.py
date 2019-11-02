@@ -21,5 +21,5 @@ from errorcenter import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(('api.urls','api'), namespace='api')),
-    path('login/', views.user_login, name='login')
+    path('login/', urls.views.UserToken.user_login, name='login')
 ]
