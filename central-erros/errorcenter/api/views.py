@@ -11,6 +11,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from .forms import UserModelForm
+
 from .models import Log, Origin, Environment, Level
 from .serializers import (LogSerializer, 
                           OriginSerializer, 
@@ -57,8 +59,9 @@ class UserApiViewSet(viewsets.ModelViewSet):
 class UserToken(APIView):
 
     def post(self, request):
-        email = request.data.get("email")
-        password = request.data.get("password")
+
+        email = request['email']
+        password = request['senha']
         
         if email is None or password is None:
             return Response({'error': 'Please provide both email and password'},
@@ -73,6 +76,24 @@ class UserToken(APIView):
         token, _ = Token.objects.get_or_create(user=user)
        
         return Response({'token': token.key}, status=status.HTTP_200_OK)
+
+    def user_login(request):
+        if  request.method == 'POST':
+
+            response = UserToken.post(request.POST, request.POST)
+            status = response.status_code
+
+            if (status != 200):
+                return render(request, 'registration/login.html', {'error': response.data['error']})
+            else:
+                return redirect('/logs', {'token': response.data['token']})
+        else:
+            form = UserModelForm()
+
+        context = {
+            'form': form
+        }
+        return render(request, 'registration/login.html', {'form': form})
 
 def SignUp(request):
      if request.method == 'POST':

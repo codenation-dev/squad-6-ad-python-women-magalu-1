@@ -12,7 +12,7 @@ router.register(r'users', views.UserApiViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('environments/',  views.EnvironmentListOnlyApiView.as_view()),
-    path('token/',    views.UserToken.as_view()),
+    path('token/', views.UserToken.as_view()),
     path('signup/', views.SignUp),
+    path('login/', views.UserToken.user_login, name='login')
 ]
-

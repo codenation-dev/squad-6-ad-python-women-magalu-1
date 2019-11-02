@@ -20,5 +20,6 @@ from api import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls')),
+    path('login/', urls.views.UserToken.user_login, name='login')
 ]
