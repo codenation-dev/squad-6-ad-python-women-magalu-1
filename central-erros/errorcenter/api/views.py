@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -17,6 +18,8 @@ from .serializers import (LogSerializer,
                           EnvironmentSerializer,
                           LevelSerializer)
 from .api_permissions import OnlyAdminCanList
+
+from errorcenter.forms import SignUpForm
 
 class LogApiViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
@@ -70,3 +73,15 @@ class UserToken(APIView):
         token, _ = Token.objects.get_or_create(user=user)
        
         return Response({'token': token.key}, status=status.HTTP_200_OK)
+
+def SignUp(request):
+     if request.method == 'POST':
+         form = SignUpForm(request.POST)
+         if form.is_valid():
+             form.save()
+             return redirect('/api')
+     else:
+         form = SignUpForm()
+
+         args = {'form': form}
+         return render(request, 'api/signup.html', args)
