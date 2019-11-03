@@ -14,5 +14,6 @@ urlpatterns = [
     path('environments/',  views.EnvironmentListOnlyApiView.as_view()),
     path('token/',    views.UserToken.as_view()),
     path('signup/', views.SignUp),
+    path('login/', views.UserToken.user_login, name='login')
 ]
 
