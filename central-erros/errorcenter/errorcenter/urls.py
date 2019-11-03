@@ -23,7 +23,6 @@ app_name='api'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(('api.urls','api'), namespace='api')),
-    path('login/', urls.views.UserToken.user_login, name='login'),
     path('logs/', views.LogsList.as_view(), name='logs'),
     path(r'logs/delete/', views.LogDeleteList, name='logs-delete-list'),
     path(r'logs/<int:pk>/delete/', views.LogDelete.as_view(), name='logs-delete'),
