@@ -17,8 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from api import urls, views
 
+from django.views.generic.base import TemplateView
+
+app_name='api'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(('api.urls','api'), namespace='api')),
-    path('login/', urls.views.UserToken.user_login, name='login')
+    path('logs/', views.LogsList.as_view(), name='logs'),
+    path(r'logs/delete/', views.LogDeleteList, name='logs-delete-list'),
+    path(r'logs/<int:pk>/delete/', views.LogDelete.as_view(), name='logs-delete'),
+    path(r'logs/<int:pk>/archive/', views.LogArchive.as_view(), name='logs-archive'),
+    path(r'', include('django.contrib.auth.urls')),
 ]
