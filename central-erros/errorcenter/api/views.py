@@ -26,7 +26,6 @@ from .serializers import (LogSerializer,
                           UserSerializer, 
                           EnvironmentSerializer,
                           LevelSerializer)
-from .api_permissions import OnlyAdminCanList
 
 from errorcenter.forms import SignUpForm
 
@@ -125,9 +124,6 @@ class EnvironmentListOnlyApiView(APIView):
     
     
 class UserApiViewSet(viewsets.ModelViewSet):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, OnlyAdminCanList]
-
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -135,8 +131,8 @@ class UserToken(APIView):
 
     def post(self, request):
 
-        email = request['email']
-        password = request['senha']
+        email = request.data.get("email")
+        password = request.data.get("password") 
         
         if email is None or password is None:
             return Response({'error': 'Please provide both email and password'},
